@@ -1,0 +1,83 @@
+package tree_coding_questions;
+
+public class BinarySearchTree {
+	
+	private class Node{
+		int data;
+		Node left;
+		Node right;
+		private Node(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+	public static void main(String args[]) {
+		BinarySearchTree bt  = new BinarySearchTree();
+		bt.add(4);
+		bt.add(2);
+		bt.add(3);
+		bt.add(1);
+		bt.add(5);
+
+		System.out.println("Pre order.... ");
+		bt.traversPreOrder(root);
+		System.out.println(" ");
+		System.out.println("Post order ");
+		bt.traversPostOrder(root);
+		System.out.println(" ");
+		System.out.println("in order ");
+		bt.traversInOrder(root);
+	}
+	
+	static Node root;
+	//add element in the BT
+	
+	private Node insertElement(int data, Node node) {
+		if(node==null) {
+			return new Node(data);
+		}
+		if(data<node.data) {
+			node.left = insertElement(data,node.left);
+		}else if(data >node.data) {
+			node.right = insertElement(data, node.right);
+		}else {
+			return node;
+		}
+		return node;
+		
+	}
+	
+	private void add(int value) {
+		root = insertElement(value, root);
+	}
+	
+	//Print the element of the Tree
+	
+	private void traversPreOrder(Node node) {
+		if(node!= null) {
+			System.out.print(" "+node.data);
+			traversPreOrder(node.left);
+			traversPreOrder(node.right);			
+		}
+		
+	}
+	private void traversPostOrder(Node node) {
+		if(node!= null) {
+			traversPreOrder(node.left);
+			traversPreOrder(node.right);
+			System.out.print(" "+node.data);
+		}
+		
+	}
+	private void traversInOrder(Node node) {
+		if(node!= null) {
+			traversInOrder(node.left);
+			System.out.print(" "+node.data);
+			traversInOrder(node.right);
+		}
+		
+	}
+	
+
+}
